@@ -23,12 +23,17 @@ site-archive/
 
 ## Status as of 2026-09-20
 
-**First pass, not full coverage.** 14 pages archived — the main site's core identity/values pages
-(Vision, History, 12 Steps, Safety and Ethics, Inclusivity, FAQ, Service, Crisis Resources, Library)
-plus 4 of the service site's governance pages (Home, Board, Tech Committee, Literature Committee).
-Not yet archived: convention pages, the `/Resources` page, ~40+ individual blog posts on the main
-site, and most of the service site's other committee pages. See `INDEX.md`'s "Not yet archived"
-notes for the specifics.
+**Second pass, still not full coverage.** 42 pages archived — 20 on the main site (core
+identity/values pages plus About, Book, Our Lineages, Member Materials, WhatsApp, Contact, Privacy
+Policy, Need for Safe Spaces, Integrating Psychedelics, Indigenous Lineages) and 22 on the service
+site (Home, Board, and nearly all committee/governance pages: Board of Directors, Tech, Literature,
+PR, Book, GSR (both `/gsr` and `/gsr-committee`), Finance, Committees index, Contact, 12-Step,
+Convention, Intergroup, Former Committees, Committee Emails, ForaPIR, Service Structure Working
+Group, plus two unfinished theme-demo placeholder pages, `about-2` and `services`, flagged as such
+in their files). Not yet archived: convention pages (`/convention-2026*`), ~40+ individual blog
+posts on the main site, and the individual "former committee" sub-pages linked from a submenu on
+the service site. The `/Resources` page referenced in earlier notes could not be found under any
+checked slug and may be stale. See `INDEX.md`'s "Not yet archived" notes for specifics.
 
 ## How to extend this
 
