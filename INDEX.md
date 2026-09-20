@@ -1,6 +1,6 @@
 # PIR Site Archive — Index
 
-46 pages archived so far (24 main site, 22 service site) — still not full coverage. See
+47 pages archived so far (25 main site, 22 service site) — still not full coverage. See
 `README.md` in this directory for scope, purpose, and how to extend this.
 
 **Real scope, now enumerated (was previously only estimated):** a full `firecrawl_map` of both
@@ -36,16 +36,23 @@ older "~40" reference elsewhere as superseded by this count.
 | [Convention Program update](https://www.psychedelicsinrecovery.org/convention-program/) | `psychedelicsinrecovery-org/convention-program.md` |
 | [Happy Birthday Albert Hofmann!](https://www.psychedelicsinrecovery.org/happy-birthday-albert-hofmann/) | `psychedelicsinrecovery-org/happy-birthday-albert-hofmann.md` |
 | [Website Re-Launch](https://www.psychedelicsinrecovery.org/website-re-launch/) | `psychedelicsinrecovery-org/website-re-launch.md` |
+| [Resources](https://www.psychedelicsinrecovery.org/resources/) | `psychedelicsinrecovery-org/resources.md` |
 
-**`/Resources` — resolved:** does not exist. A full `firecrawl_map` of the entire main site
-(2026-09-20) contains no `/resources` URL under any variant. Confirmed stale, not just unconfirmed
-— safe to stop chasing this reference wherever it appears in older notes.
+**`/Resources` — corrected, the earlier "does not exist" note was wrong.** It's a real, published
+page (WordPress `post_id: 24`, slug `resources`, permalink matches exactly) — confirmed directly via
+`emcp-tools-get-post`, not a crawler. It's simply **not in the XML sitemap `firecrawl_map` reads**,
+so the earlier full-site map missed it even though it's live. Now archived above.
 
-**`/convention-2026-schedule`** — also does not appear in the full site map, despite being linked
-from both `/convention-2026` and `/convention-program`'s content (as "coming soon" / a "View Full
-Schedule" link). Likely either unpublished/draft, or a page WordPress doesn't expose to its own
-sitemap yet. Worth a direct `firecrawl_scrape` attempt specifically at that URL in a future pass
-rather than relying on `firecrawl_map` to surface it.
+**Pattern worth carrying into the next pass:** since one page turned out to be real despite being
+sitemap-invisible, `firecrawl_map`'s output should be treated as *sitemap coverage*, not *full site
+coverage*. `/convention-2026-schedule` below is the other page hitting this same gap — checking it
+via `emcp-tools` (`list-pages` or a direct `get-post` if the ID is known) rather than another
+`firecrawl_map` attempt is the more reliable next step.
+
+**`/convention-2026-schedule`** — still unresolved. Linked from both `/convention-2026` and
+`/convention-program`'s content (as "coming soon" / a "View Full Schedule" link), but absent from
+`firecrawl_map`'s output — likely the same sitemap-visibility gap `/Resources` just turned out to
+have, not evidence it's actually missing. Check via `emcp-tools` directly, not another map attempt.
 
 **Not yet archived — ~96 individual posts remain**, out of the ~100 the full site map found. This
 pass archived 2 of them (Happy Birthday Albert Hofmann, Website Re-Launch) plus both real convention
@@ -104,15 +111,13 @@ rather than assuming this index's prose summary above is exhaustive down to the 
 | [ForaPIR](https://service.psychedelicsinrecovery.org/forapir/) | `service-psychedelicsinrecovery-org/forapir.md` |
 | [Service Structure Working Group](https://service.psychedelicsinrecovery.org/service-structure-working-group/) | `service-psychedelicsinrecovery-org/service-structure-working-group.md` |
 
-**Former-committee sub-pages — investigated, not resolved.** A full `firecrawl_map` of the entire
-service subdomain (2026-09-20) surfaced **zero** additional URLs matching a "former committee"
-pattern beyond the parent page already archived. The parent page's own text says these are reached
-by hovering the "Former Committees" submenu in the navbar — if those are real, separately-addressable
-pages, they're either excluded from WordPress's sitemap (so `firecrawl_map`, which leans on sitemaps,
-can't see them) or they only exist as in-page anchors/JS-driven content rather than real URLs at all.
-Resolving this needs either a direct browser session (hover the menu, read the actual `href`s) or
-asking Kevin/whoever built that page directly — not more crawling of the same kind that already
-failed to find them twice.
+**Former-committee sub-pages — actually resolved, an earlier pass's note here was confused.**
+Christopher confirmed directly: the pages reached from the "Former Committees" submenu are
+**Intergroup, Service Structure Working Group, ForaPIR, and 12 Step Committee** — all four are
+already in the table above, archived in an earlier pass. A later pass's `firecrawl_map` sweep found
+"zero additional URLs" and mistakenly read that as an open gap, without recognizing the pages it was
+looking for were the ones already sitting in this same index a few rows up. No further work needed
+here.
 
 **New pages found this pass, not yet archived:** `/literature` (distinct from "Literature
 Committee" — worth checking whether it's a duplicate or genuinely different content before

@@ -21,27 +21,32 @@ site-archive/
   service-psychedelicsinrecovery-org/  — service site, same pattern
 ```
 
-## Status as of 2026-09-20 (third pass)
+## Status as of 2026-09-21 (fourth pass — corrections, not new crawling)
 
-**Still not full coverage — but the real scope is now known, not just estimated.** 46 pages
-archived — 24 on the main site (core identity/values pages, About, Book, Our Lineages, Member
+**Still not full coverage — but the real scope is now known, not just estimated.** 47 pages
+archived — 25 on the main site (core identity/values pages, About, Book, Our Lineages, Member
 Materials, WhatsApp, Contact, Privacy Policy, Need for Safe Spaces, Integrating Psychedelics,
-Indigenous Lineages, both real convention pages, and 2 representative blog posts) and 22 on the
+Indigenous Lineages, both real convention pages, Resources, and 2 representative blog posts) and 22 on the
 service site (Home, Board, and nearly all committee/governance pages).
 
-This pass ran a full `firecrawl_map` of both entire sites and found the main site actually has
+A third pass ran a full `firecrawl_map` of both entire sites and found the main site actually has
 **~100 individual blog/series posts**, not the "~40" earlier passes estimated — that number is now
-corrected everywhere it appears. It also **resolved two open questions rather than leaving them
-open**: `/Resources` does not exist anywhere in either site's map (confirmed stale, safe to stop
-chasing), and the service site's "former committee" sub-pages could not be found via any crawl-based
-method — they're either sitemap-excluded or not real standalone URLs at all, and actually resolving
-that needs a browser session, not more mapping.
+corrected everywhere it appears. That pass also got two things wrong, both corrected in this pass:
+it reported `/Resources` as not existing, when direct verification via `emcp-tools-get-post` found
+it's real and published (WordPress `post_id: 24`) — just absent from the XML sitemap
+`firecrawl_map` reads, so a crawler alone can miss a real page. It also treated the service site's
+"former committee" sub-pages as unresolved, without recognizing those pages (Intergroup, Service
+Structure Working Group, ForaPIR, 12 Step Committee) were already archived in an earlier pass —
+Christopher confirmed the exact names directly. **Lesson for future passes:** when `firecrawl_map`
+reports zero results, that means zero results *in the sitemap* — verify against `emcp-tools`
+directly before concluding a page doesn't exist.
 
 **Not yet archived:** ~96 of the ~100 main-site blog/series posts (grouped by theme in `INDEX.md`
 for whoever picks this up next — a "10 Models of Integration" series, a "Hero's Journey" series, an
 AA/Bill-Wilson-history cluster, personal stories, and book reviews/essays); `/convention-2026-schedule`
-specifically (linked from two pages but absent from the sitemap — try a direct scrape, not a map,
-next time); the service site's `/literature`, `/calendar-service`, and `/first-test-forapir-blog-post`.
+specifically (linked from two pages but absent from the sitemap — check via `emcp-tools` directly,
+not another map attempt, per the lesson above); the service site's `/literature`, `/calendar-service`,
+and `/first-test-forapir-blog-post`.
 See `INDEX.md` for the full, current breakdown — it supersedes this summary if the two ever drift.
 
 ## How to extend this

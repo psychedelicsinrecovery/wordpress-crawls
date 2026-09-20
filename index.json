@@ -320,5 +320,12 @@
     "path": "psychedelicsinrecovery-org/website-re-launch.md",
     "title": "Website Re-Launch - Psychedelics In Recovery™",
     "crawl_date": "2026-09-20"
+  },
+  {
+    "site": "psychedelicsinrecovery.org",
+    "url": "https://www.psychedelicsinrecovery.org/resources/",
+    "path": "psychedelicsinrecovery-org/resources.md",
+    "title": "🧰 Resources",
+    "crawl_date": "2026-09-21"
   }
 ]
