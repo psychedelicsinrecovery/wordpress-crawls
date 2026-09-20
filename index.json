@@ -292,5 +292,33 @@
     "path": "service-psychedelicsinrecovery-org/tech.md",
     "title": "Tech - PIR® Service",
     "crawl_date": "2026-09-20"
+  },
+  {
+    "site": "psychedelicsinrecovery.org",
+    "url": "https://www.psychedelicsinrecovery.org/convention-2026/",
+    "path": "psychedelicsinrecovery-org/convention-2026.md",
+    "title": "2026 PIR® Convention - Psychedelics In Recovery™",
+    "crawl_date": "2026-09-20"
+  },
+  {
+    "site": "psychedelicsinrecovery.org",
+    "url": "https://www.psychedelicsinrecovery.org/convention-program/",
+    "path": "psychedelicsinrecovery-org/convention-program.md",
+    "title": "One Month From the Inaugural PIR Convention in Denver! - Psychedelics In Recovery™",
+    "crawl_date": "2026-09-20"
+  },
+  {
+    "site": "psychedelicsinrecovery.org",
+    "url": "https://www.psychedelicsinrecovery.org/happy-birthday-albert-hofmann/",
+    "path": "psychedelicsinrecovery-org/happy-birthday-albert-hofmann.md",
+    "title": "Happy Birthday Albert Hofmann! - Psychedelics In Recovery™",
+    "crawl_date": "2026-09-20"
+  },
+  {
+    "site": "psychedelicsinrecovery.org",
+    "url": "https://www.psychedelicsinrecovery.org/website-re-launch/",
+    "path": "psychedelicsinrecovery-org/website-re-launch.md",
+    "title": "Website Re-Launch - Psychedelics In Recovery™",
+    "crawl_date": "2026-09-20"
   }
 ]

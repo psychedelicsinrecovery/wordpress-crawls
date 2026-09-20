@@ -21,19 +21,28 @@ site-archive/
   service-psychedelicsinrecovery-org/  — service site, same pattern
 ```
 
-## Status as of 2026-09-20
+## Status as of 2026-09-20 (third pass)
 
-**Second pass, still not full coverage.** 42 pages archived — 20 on the main site (core
-identity/values pages plus About, Book, Our Lineages, Member Materials, WhatsApp, Contact, Privacy
-Policy, Need for Safe Spaces, Integrating Psychedelics, Indigenous Lineages) and 22 on the service
-site (Home, Board, and nearly all committee/governance pages: Board of Directors, Tech, Literature,
-PR, Book, GSR (both `/gsr` and `/gsr-committee`), Finance, Committees index, Contact, 12-Step,
-Convention, Intergroup, Former Committees, Committee Emails, ForaPIR, Service Structure Working
-Group, plus two unfinished theme-demo placeholder pages, `about-2` and `services`, flagged as such
-in their files). Not yet archived: convention pages (`/convention-2026*`), ~40+ individual blog
-posts on the main site, and the individual "former committee" sub-pages linked from a submenu on
-the service site. The `/Resources` page referenced in earlier notes could not be found under any
-checked slug and may be stale. See `INDEX.md`'s "Not yet archived" notes for specifics.
+**Still not full coverage — but the real scope is now known, not just estimated.** 46 pages
+archived — 24 on the main site (core identity/values pages, About, Book, Our Lineages, Member
+Materials, WhatsApp, Contact, Privacy Policy, Need for Safe Spaces, Integrating Psychedelics,
+Indigenous Lineages, both real convention pages, and 2 representative blog posts) and 22 on the
+service site (Home, Board, and nearly all committee/governance pages).
+
+This pass ran a full `firecrawl_map` of both entire sites and found the main site actually has
+**~100 individual blog/series posts**, not the "~40" earlier passes estimated — that number is now
+corrected everywhere it appears. It also **resolved two open questions rather than leaving them
+open**: `/Resources` does not exist anywhere in either site's map (confirmed stale, safe to stop
+chasing), and the service site's "former committee" sub-pages could not be found via any crawl-based
+method — they're either sitemap-excluded or not real standalone URLs at all, and actually resolving
+that needs a browser session, not more mapping.
+
+**Not yet archived:** ~96 of the ~100 main-site blog/series posts (grouped by theme in `INDEX.md`
+for whoever picks this up next — a "10 Models of Integration" series, a "Hero's Journey" series, an
+AA/Bill-Wilson-history cluster, personal stories, and book reviews/essays); `/convention-2026-schedule`
+specifically (linked from two pages but absent from the sitemap — try a direct scrape, not a map,
+next time); the service site's `/literature`, `/calendar-service`, and `/first-test-forapir-blog-post`.
+See `INDEX.md` for the full, current breakdown — it supersedes this summary if the two ever drift.
 
 ## How to extend this
 
