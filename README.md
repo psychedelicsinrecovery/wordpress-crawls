@@ -21,13 +21,27 @@ site-archive/
   service-psychedelicsinrecovery-org/  — service site, same pattern
 ```
 
-## Status as of 2026-09-21 (fourth pass — corrections, not new crawling)
+## Status as of 2026-09-20 (fifth pass — direct-SQL gap fill)
 
-**Still not full coverage — but the real scope is now known, not just estimated.** 47 pages
-archived — 25 on the main site (core identity/values pages, About, Book, Our Lineages, Member
+**Still not full coverage — but the real scope is now known, not just estimated.** 55 pages
+archived — 33 on the main site (core identity/values pages, About, Book, Our Lineages, Member
 Materials, WhatsApp, Contact, Privacy Policy, Need for Safe Spaces, Integrating Psychedelics,
-Indigenous Lineages, both real convention pages, Resources, and 2 representative blog posts) and 22 on the
-service site (Home, Board, and nearly all committee/governance pages).
+Indigenous Lineages, both real convention pages, Resources, Meetings + its 2 sub-pages (Online,
+In-Person), Blog, Common Prayers, Navigating New Challenges, Donate, Public Relations, Newsletter,
+and 2 representative blog posts) and 22 on the service site (Home, Board, and nearly all
+committee/governance pages).
+
+This pass was triggered by Christopher noticing real submenu pages (Meetings, Donate, Blog,
+Newsletter, etc.) were missing despite `emcp-tools-list-pages` and `firecrawl_map` both having been
+used already. Both tools turned out to be unreliable for full enumeration: `list-pages` silently
+omits some real pages (confirmed missing post_id 2, "Meetings," with no error), and `firecrawl_map`
+only sees what's in the XML sitemap. The fix was going straight to the database:
+`emcp-tools-query` against `wp_eup8um_posts` (the real table prefix on this site — not the default
+`wp_`, found via `emcp-tools-list-tables`) returned all 48 real published pages directly, no
+sitemap or crawler gaps possible. That list is now the authoritative source of truth this archive
+is reconciled against — see `INDEX.md` for exactly what's resolved and what's still open
+(`/announcements/` and `/events/` in particular are real nav items but not simple pages — see
+`INDEX.md` for why).
 
 A third pass ran a full `firecrawl_map` of both entire sites and found the main site actually has
 **~100 individual blog/series posts**, not the "~40" earlier passes estimated — that number is now

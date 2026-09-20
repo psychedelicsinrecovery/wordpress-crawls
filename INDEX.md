@@ -1,7 +1,19 @@
 # PIR Site Archive — Index
 
-47 pages archived so far (25 main site, 22 service site) — still not full coverage. See
+55 pages archived so far (33 main site, 22 service site) — still not full coverage. See
 `README.md` in this directory for scope, purpose, and how to extend this.
+
+**2026-09-20 pass — direct-SQL gap fill.** Christopher flagged that several submenu pages
+(Meetings, Donate, Blog, Newsletter, etc.) were missing despite being real nav items. Both
+`emcp-tools-list-pages` (silently omits some real pages — confirmed missing Meetings/post_id 2,
+no error) and `firecrawl_map` (sitemap-only, misses real unlisted pages) had already been shown
+unreliable, so this pass instead queried `wp_eup8um_posts` directly
+(`SELECT ID, post_title, post_type, post_name FROM wp_eup8um_posts WHERE post_status = 'publish'
+AND post_type = 'page'`) — the real WordPress table prefix on this site is `wp_eup8um_`, not the
+default `wp_`. That returned all 48 real published pages, the authoritative source of truth this
+index is now reconciled against. 8 new pages added: Meetings, Online Meetings, In-Person Meetings,
+Blog, Common Prayers, Navigating New Challenges, Donate (`/7th-tradition/`), Public Relations,
+Newsletter.
 
 **Real scope, now enumerated (was previously only estimated):** a full `firecrawl_map` of both
 sites on 2026-09-20 found **~100 individual blog/series posts** on the main site — not the
@@ -37,6 +49,15 @@ older "~40" reference elsewhere as superseded by this count.
 | [Happy Birthday Albert Hofmann!](https://www.psychedelicsinrecovery.org/happy-birthday-albert-hofmann/) | `psychedelicsinrecovery-org/happy-birthday-albert-hofmann.md` |
 | [Website Re-Launch](https://www.psychedelicsinrecovery.org/website-re-launch/) | `psychedelicsinrecovery-org/website-re-launch.md` |
 | [Resources](https://www.psychedelicsinrecovery.org/resources/) | `psychedelicsinrecovery-org/resources.md` |
+| [Meetings *ALL*](https://www.psychedelicsinrecovery.org/meetings/) | `psychedelicsinrecovery-org/meetings.md` |
+| [Online Meetings](https://www.psychedelicsinrecovery.org/meetings/online-meetings/) | `psychedelicsinrecovery-org/meetings/online-meetings.md` |
+| [In-Person Meetings](https://www.psychedelicsinrecovery.org/meetings/in-person-meetings/) | `psychedelicsinrecovery-org/meetings/in-person-meetings.md` |
+| [Blog](https://www.psychedelicsinrecovery.org/blog/) | `psychedelicsinrecovery-org/blog.md` |
+| [Common Prayers](https://www.psychedelicsinrecovery.org/common-prayers/) | `psychedelicsinrecovery-org/common-prayers.md` |
+| [Navigating New Challenges](https://www.psychedelicsinrecovery.org/navigating-new-challenges/) | `psychedelicsinrecovery-org/navigating-new-challenges.md` |
+| [Donate (7th Tradition)](https://www.psychedelicsinrecovery.org/7th-tradition/) | `psychedelicsinrecovery-org/7th-tradition.md` |
+| [Public Relations](https://www.psychedelicsinrecovery.org/public-relations/) | `psychedelicsinrecovery-org/public-relations.md` |
+| [De Vine Newsletter](https://www.psychedelicsinrecovery.org/newsletter/) | `psychedelicsinrecovery-org/newsletter.md` |
 
 **`/Resources` — corrected, the earlier "does not exist" note was wrong.** It's a real, published
 page (WordPress `post_id: 24`, slug `resources`, permalink matches exactly) — confirmed directly via
@@ -79,6 +100,35 @@ alphabetically:
 
 Also not yet archived: `/meetings/in-person-meetings-2` (a real content page, not a blog post —
 missed by earlier passes' page-vs-post triage, worth catching next time).
+
+**Resolved this pass, from the authoritative 48-page SQL list:**
+- **"Privacy Policy" (post_id 3, slug `privacy-policy`) is NOT a duplicate.** Its real permalink,
+  confirmed via `emcp-tools-get-post`, is `/safety-and-ethics/privacy-policy/` — same page already
+  archived at `psychedelicsinrecovery-org/safety-and-ethics/privacy-policy.md`. WordPress's flat
+  `post_name` field doesn't show the parent-page path, which is what made it look like a second,
+  root-level page in the raw SQL output.
+- **`/notifications/` is a 301 redirect, not a page.** Confirmed via
+  `wp_eup8um_redirection_items`: `/notifications/` → `/subscribe-general/` (the Brevo email
+  signup form). Linked from both Meetings and Online Meetings as "sign up for the weekly digest" —
+  not archived separately since it has no content of its own.
+- **"Announcements" is still unresolved.** Linked from Public Relations
+  (`/announcements/`) but absent from the 48-page list — likely a category/tag archive of
+  `post`-type content, not a standalone page. Needs direct verification, not assumption.
+- **"Events" is confirmed NOT a page** — it's the `tribe_events` custom post type (The Events
+  Calendar plugin), via `emcp-tools-list-post-types`. Needs a `list-posts`/`query` call with
+  `post_type=tribe_events` to enumerate, not `get-post`. Not yet archived.
+
+**Also found in the 48-page list, not yet archived (lower priority, utility/legacy pages):**
+Common Prayers, Navigating New Challenges, Donate, Public Relations, and Newsletter are now done
+(above). Still open: Legacy article-style pages `1950s Psychedelic Research in Addictions`
+(post_id 9975), `12-steps From AA to Psychedelics in Recovery` (9977, likely a near-duplicate of
+the already-archived `12-steps.md` — check before archiving), `Harm Reduction over pure
+Abstinence` (9981), `Clinical Advances in Trauma work` (9984), `From Phantasticants to Entheogens`
+(10089). Utility/form pages intentionally skipped as low-value for full-content archiving: Thank
+you (241), Submitpost (9143), ThemeNcode PDF Viewer ×2 (9880, 9881, plugin infrastructure), Search
+(12891), 5 Private Meeting Subscribe pages (Zoom-registration forms), 2 Subscribe General pages
+(488, 12067, the Brevo signup form `/notifications/` redirects to), In-Person-2 Elementor draft
+(11983).
 
 The full raw URL list this pass's `firecrawl_map` call returned is not re-saved anywhere separately
 — re-run `firecrawl_map` on `https://www.psychedelicsinrecovery.org` (limit 300) to regenerate it
