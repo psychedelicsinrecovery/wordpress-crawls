@@ -21,47 +21,40 @@ site-archive/
   service-psychedelicsinrecovery-org/  — service site, same pattern
 ```
 
-## Status as of 2026-09-20 (fifth pass — direct-SQL gap fill)
+## Status as of 2026-09-20 (sixth pass — every real page on both sites, verified by direct SQL)
 
-**Still not full coverage — but the real scope is now known, not just estimated.** 55 pages
-archived — 33 on the main site (core identity/values pages, About, Book, Our Lineages, Member
-Materials, WhatsApp, Contact, Privacy Policy, Need for Safe Spaces, Integrating Psychedelics,
-Indigenous Lineages, both real convention pages, Resources, Meetings + its 2 sub-pages (Online,
-In-Person), Blog, Common Prayers, Navigating New Challenges, Donate, Public Relations, Newsletter,
-and 2 representative blog posts) and 22 on the service site (Home, Board, and nearly all
-committee/governance pages).
+**Every real, published *page* on both sites is now archived — 62 total (34 main site, 28 service
+site).** What's left is individual *blog posts* (~96 of them on the main site), not pages — see
+below. This pass extended the direct-SQL method from the main site (fifth pass) to the service
+site, closing every remaining page-level gap on both.
 
-This pass was triggered by Christopher noticing real submenu pages (Meetings, Donate, Blog,
-Newsletter, etc.) were missing despite `emcp-tools-list-pages` and `firecrawl_map` both having been
-used already. Both tools turned out to be unreliable for full enumeration: `list-pages` silently
-omits some real pages (confirmed missing post_id 2, "Meetings," with no error), and `firecrawl_map`
-only sees what's in the XML sitemap. The fix was going straight to the database:
-`emcp-tools-query` against `wp_eup8um_posts` (the real table prefix on this site — not the default
-`wp_`, found via `emcp-tools-list-tables`) returned all 48 real published pages directly, no
-sitemap or crawler gaps possible. That list is now the authoritative source of truth this archive
-is reconciled against — see `INDEX.md` for exactly what's resolved and what's still open
-(`/announcements/` and `/events/` in particular are real nav items but not simple pages — see
-`INDEX.md` for why).
+**Why "every page" can be stated with confidence now, not just estimated:** two tools that look
+authoritative for enumeration aren't. `emcp-tools-list-pages` silently omits some real pages (no
+error, just missing — confirmed missing "Meetings" on the main site). `firecrawl_map` only sees
+what's in a site's XML sitemap, and both sites have real pages excluded from theirs. The fix both
+times was going straight to the database: `emcp-tools-query`, `SELECT ID, post_title, post_type,
+post_name FROM {prefix}_posts WHERE post_status='publish' AND post_type='page'`. The main site's
+real table prefix is `wp_eup8um_`; the service site's is the WordPress default `wp_` — both found
+via `emcp-tools-list-tables` before the first query on each site returned zero rows. That query is
+exhaustive by construction — nothing sitemap- or crawler-visibility-dependent can hide from it.
 
-A third pass ran a full `firecrawl_map` of both entire sites and found the main site actually has
-**~100 individual blog/series posts**, not the "~40" earlier passes estimated — that number is now
-corrected everywhere it appears. That pass also got two things wrong, both corrected in this pass:
-it reported `/Resources` as not existing, when direct verification via `emcp-tools-get-post` found
-it's real and published (WordPress `post_id: 24`) — just absent from the XML sitemap
-`firecrawl_map` reads, so a crawler alone can miss a real page. It also treated the service site's
-"former committee" sub-pages as unresolved, without recognizing those pages (Intergroup, Service
-Structure Working Group, ForaPIR, 12 Step Committee) were already archived in an earlier pass —
-Christopher confirmed the exact names directly. **Lesson for future passes:** when `firecrawl_map`
-reports zero results, that means zero results *in the sitemap* — verify against `emcp-tools`
-directly before concluding a page doesn't exist.
+Main site: 48 rows returned, 34 archived as real content, 14 deliberately skipped (signup forms,
+plugin infrastructure, drafts, one likely-duplicate legacy post — see `INDEX.md` for the exact
+list). Service site: 27 rows, all 28 archived files accounted for (including demo placeholders and
+a redirect stub, kept for completeness per Christopher's explicit "don't miss a single page," plus
+one real page — Committee Emails and Setup — that's `post_type: post` rather than `page`, so it
+didn't show up in the page-only query but was already correctly archived from an earlier pass).
 
-**Not yet archived:** ~96 of the ~100 main-site blog/series posts (grouped by theme in `INDEX.md`
-for whoever picks this up next — a "10 Models of Integration" series, a "Hero's Journey" series, an
-AA/Bill-Wilson-history cluster, personal stories, and book reviews/essays); `/convention-2026-schedule`
-specifically (linked from two pages but absent from the sitemap — check via `emcp-tools` directly,
-not another map attempt, per the lesson above); the service site's `/literature`, `/calendar-service`,
-and `/first-test-forapir-blog-post`.
-See `INDEX.md` for the full, current breakdown — it supersedes this summary if the two ever drift.
+Three things that looked like open pages resolved to *not pages* this pass, confirmed rather than
+left ambiguous: `/notifications/` is a 301 redirect to `/subscribe-general/`; `/announcements/` is
+a blog category (2 posts, will be picked up with the blog-post sweep below, not tracked
+separately); `/events/` is a plugin custom-post-type (The Events Calendar) that Christopher
+confirmed isn't actually used, so it's out of scope by design, not an oversight.
+
+**Not yet archived:** the ~96 individual blog/series posts on the main site (grouped by theme in
+`INDEX.md`), and `/meetings/in-person-meetings-2` (flagged, unverified whether it's published or a
+draft). See `INDEX.md` for the full, current breakdown — it supersedes this summary if the two ever
+drift.
 
 ## How to extend this
 
