@@ -1,5 +1,8 @@
 # PIR Site Archive
 
+> ➡️ **Moved (2026-10-05):** this archive now lives in [`tech-committee/wordpress-crawls`](https://github.com/psychedelicsinrecovery/tech-committee-public/tree/main/wordpress-crawls) (full history kept, public via `tech-committee-public`). This repo stays in place for older links and sessions, and will be archived once everything points at the new home. Please make new edits there.
+
+
 A Markdown archive of both PIR WordPress sites, for three purposes: (1) self-serve context for the
 agent fleet without needing live WordPress access, (2) a rebuild-from-scratch source if WordPress
 hosting is ever lost, (3) a content backup.
